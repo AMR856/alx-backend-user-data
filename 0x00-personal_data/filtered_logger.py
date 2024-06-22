@@ -3,44 +3,63 @@
 from typing import List
 import re
 import logging
-
-
-class RedactingFormatter(logging.Formatter):
-    """ Redacting Formatter class
-        """
-
-    REDACTION = "***"
-    FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
-    SEPARATOR = ";"
-
-    def __init__(self, fields: List[str]):
-        super(RedactingFormatter, self).__init__(self.FORMAT)
-        self.fields = fields
-
-    def format(self, record: logging.LogRecord) -> str:
-        record.asctime = self.formatTime(record, self.datefmt)
-        msg = filter_datum(self.fields, RedactingFormatter.REDACTION,
-                           record.msg, RedactingFormatter.SEPARATOR)
-        msg = re.sub(';', '; ', msg)
-        return f'[HOLBERTON] {record.name} \
-{record.levelname} {record.asctime}: {msg}'
+import os
+import mysql.connector
+PII_FIELDS = ('name', 'email', 'password', 'ssn', 'phone')
 
 
 def filter_datum(
         fields: List[str], redaction: str, message: str, separator: str,
         ) -> str:
+    """A function to expresss yourself"""
     pattern = f"({'|'.join(map(re.escape, fields))})=[^{separator}]*"
     return re.sub(pattern, lambda m: f"{m.group(1)}={redaction}", message)
 
-# the_string_list = message.split(';')
-# the_string_list.pop()
-# final_string = ''
-# elm_list = []
-# for elm in the_string_list:
-#     elm_list = elm.split('=')
-#     if elm_list[0] in fields:
-#         elm_list[1] = redaction
-#     elm_list.insert(1, '=')
-#     elm_list.append(separtor)
-#     final_string = final_string + ''.join(elm_list)
-# return final_string
+
+def get_logger() -> logging.Logger:
+    logger = logging.getLogger('user_data')
+    logger.setLevel(logging.INFO)
+    stream_handler = logging.StreamHandler()
+    stream_handler.setFormatter(RedactingFormatter(PII_FIELDS))
+    logger.propagate = False
+    logger.addHandler(stream_handler)
+    return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    db_name = os.get('PERSONAL_DATA_DB_NAME')
+    db_username = os.getenv('PERSONAL_DATA_DB_USERNAME', 'root')
+    db_password = os.getenv('PERSONAL_DATA_DB_PASSWORD ', '')
+    db_host = os.getenv('and PERSONAL_DATA_DB_HOST', 'localhost')
+    config = {
+        'host': db_host,
+        'user': db_username,
+        'password': db_password,
+        'database': db_name
+    }
+    try:
+        connection = mysql.connector.connect(**config)
+        return connection
+    except mysql.connector.Error as error:
+        print("Couldn't connect")
+
+
+class RedactingFormatter(logging.Formatter):
+    """ Redacting Formatter class
+        """
+    REDACTION = "***"
+    FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
+    SEPARATOR = ";"
+
+    def __init__(self, fields: List[str]):
+        """Do you think we have to do this"""
+        super(RedactingFormatter, self).__init__(self.FORMAT)
+        self.fields = fields
+
+    def format(self, record: logging.LogRecord) -> str:
+        """Some documentation is here"""
+        record.asctime = self.formatTime(record, self.datefmt)
+        msg = filter_datum(self.fields, RedactingFormatter.REDACTION,
+                           record.msg, RedactingFormatter.SEPARATOR)
+        return f'[HOLBERTON] {record.name} \
+{record.levelname} {record.asctime}: {msg}'

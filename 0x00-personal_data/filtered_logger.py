@@ -17,6 +17,7 @@ def filter_datum(
 
 
 def get_logger() -> logging.Logger:
+    """Logger getter"""
     logger = logging.getLogger('user_data')
     logger.setLevel(logging.INFO)
     stream_handler = logging.StreamHandler()
@@ -27,7 +28,8 @@ def get_logger() -> logging.Logger:
 
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
-    db_name = os.get('PERSONAL_DATA_DB_NAME')
+    """Database connector"""
+    db_name = os.get('PERSONAL_DATA_DB_NAME', '')
     db_username = os.getenv('PERSONAL_DATA_DB_USERNAME', 'root')
     db_password = os.getenv('PERSONAL_DATA_DB_PASSWORD ', '')
     db_host = os.getenv('and PERSONAL_DATA_DB_HOST', 'localhost')
@@ -35,7 +37,8 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         'host': db_host,
         'user': db_username,
         'password': db_password,
-        'database': db_name
+        'database': db_name, 
+        'port':3306
     }
     try:
         connection = mysql.connector.connect(**config)

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Encryption is the key to success in security"""
 import bcrypt
 
 

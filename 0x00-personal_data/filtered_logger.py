@@ -11,7 +11,7 @@ PII_FIELDS = ('name', 'email', 'password', 'ssn', 'phone')
 def filter_datum(
         fields: List[str], redaction: str, message: str, separator: str,
         ) -> str:
-    """A function to expresss yourself"""
+    """A function to express yourself"""
     pattern = f"({'|'.join(map(re.escape, fields))})=[^{separator}]*"
     return re.sub(pattern, lambda m: f"{m.group(1)}={redaction}", message)
 
@@ -33,18 +33,26 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     db_username = os.getenv('PERSONAL_DATA_DB_USERNAME', 'root')
     db_password = os.getenv('PERSONAL_DATA_DB_PASSWORD ', '')
     db_host = os.getenv('and PERSONAL_DATA_DB_HOST', 'localhost')
-    config = {
-        'host': db_host,
-        'user': db_username,
-        'password': db_password,
-        'database': db_name,
-        'port': 3306
-    }
-    try:
-        connection = mysql.connector.connect(**config)
-        return connection
-    except mysql.connector.Error as error:
-        print("Couldn't connect")
+    connection = mysql.connector.connect(
+        host=db_host,
+        port=3306,
+        user=db_username,
+        password=db_password,
+        database=db_name,
+    )
+    return connection
+    # config = {
+    #     'host': db_host,
+    #     'user': db_username,
+    #     'password': db_password,
+    #     'database': db_name,
+    #     'port': 3306
+    # }
+    # try:
+    #     connection = mysql.connector.connect(**config)
+    #     return connection
+    # except mysql.connector.Error as error:
+    #     print("Couldn't connect")
 
 
 class RedactingFormatter(logging.Formatter):

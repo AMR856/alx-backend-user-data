@@ -1,0 +1,1 @@
+## User's personal data is not my responsibility at all

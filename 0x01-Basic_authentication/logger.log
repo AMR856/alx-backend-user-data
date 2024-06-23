@@ -1,0 +1,11 @@
+INFO:werkzeug: * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.24.84.248:5000 (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [23/Jun/2024 02:50:09] "GET /api/v1/status/ HTTP/1.1" 200 -
+INFO:werkzeug: * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.24.84.248:5000 (Press CTRL+C to quit)
+CRITICAL:root:None
+INFO:werkzeug:127.0.0.1 - - [23/Jun/2024 02:51:02] "GET /api/v1/status/ HTTP/1.1" 200 -

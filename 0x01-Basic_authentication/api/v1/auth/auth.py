@@ -20,8 +20,11 @@ class Auth:
             return False
         return True
 
+
     def authorization_header(self, request=None) -> str:
         """What is going on here"""
+        if request is not None:
+            return request.headers.get('Authorization', None)
         return None
 
     def current_user(self, request=None) -> TypeVar('User'):  # type: ignore

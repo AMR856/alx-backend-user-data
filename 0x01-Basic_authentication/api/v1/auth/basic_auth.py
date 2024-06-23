@@ -69,3 +69,21 @@ class BasicAuth(Auth):
                 continue
             return elm
         return None
+
+
+    def current_user(self, request=None) -> TypeVar('User'):  # type: ignore
+        """Getting the user"""
+        auth_header = self.authorization_header(request)
+        header_auth_value = str(
+            self.extract_base64_authorization_header(str(auth_header))
+            )
+        decoded_value = str(self.decode_base64_authorization_header(
+            str(header_auth_value))
+            )
+        extracted_tuple = self.extract_user_credentials(str(
+            decoded_value
+        ))
+        user_object = self.user_object_from_credentials(
+            extracted_tuple[0], extracted_tuple[1]
+        )
+        return user_object

@@ -3,6 +3,10 @@
 """
 from flask import request
 from typing import List, TypeVar
+# import logging
+import os
+# logger = logging.getLogger()
+# logging.basicConfig(filename='logger1.log')
 
 
 class Auth:
@@ -29,3 +33,11 @@ class Auth:
     def current_user(self, request=None) -> TypeVar('User'):  # type: ignore
         """Current user thing"""
         return None
+
+    def session_cookie(self, request=None) -> str:
+        """Session cookie value getter"""
+        if request is None:
+            return None
+        session_name = os.getenv('SESSION_NAME')
+        cookie_value = request.cookies.get(session_name, None)
+        return cookie_value

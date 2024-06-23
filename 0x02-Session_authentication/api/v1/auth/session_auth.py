@@ -3,7 +3,9 @@
 """
 
 from api.v1.auth.auth import Auth
-# from models.user import User
+from models.user import User
+# import logging
+import os
 from typing import TypeVar
 import uuid
 
@@ -34,4 +36,5 @@ class SessionAuth(Auth):
         if session_id is None:
             return None
         user_id = self.user_id_for_session_id(session_id)
-        return user_id
+        user = User.get(user_id)
+        return user

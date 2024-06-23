@@ -42,6 +42,7 @@ class BasicAuth(Auth):
     def extract_user_credentials(self,
                                  decoded_base64_authorization_header: str) \
             -> Tuple[str, str]:
+        """Do you think this is so important?"""
         if decoded_base64_authorization_header is None:
             return (None, None)
         if type(decoded_base64_authorization_header) is not str:

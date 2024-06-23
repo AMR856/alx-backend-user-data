@@ -27,6 +27,7 @@ class SessionAuth(Auth):
         return SessionAuth.user_id_by_session_id.get(session_id, None)
 
     def current_user(self, request=None) -> TypeVar('User'):  # type: ignore
+        """This function can make problems as you can see"""
         if request is None:
             return None
         session_id = self.session_cookie(request)

@@ -70,7 +70,6 @@ class BasicAuth(Auth):
             return elm
         return None
 
-
     def current_user(self, request=None) -> TypeVar('User'):  # type: ignore
         """Getting the user"""
         auth_header = self.authorization_header(request)

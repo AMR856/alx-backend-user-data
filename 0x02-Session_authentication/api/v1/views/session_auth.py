@@ -31,3 +31,14 @@ def auth_handler() -> Tuple[str, int]:
     session_name = os.getenv('SESSION_NAME', None)
     out.set_cookie(session_name, session_id)
     return out
+
+
+@app_views.route('/auth_session/logout',
+                 methods=["DELETE"], strict_slashes=False)
+def logout() -> Tuple[str, int]:
+    """Logout handler"""
+    from api.v1.app import auth
+    result = auth.destroy_session(request)
+    if result is False:
+        abort(404)
+    return jsonify({}), 200

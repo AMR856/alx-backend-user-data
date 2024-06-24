@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """DB module
 """
 from sqlalchemy import create_engine
@@ -9,6 +10,8 @@ from sqlalchemy.orm.session import Session
 from user import Base, User
 
 VALID_ARGS = ['email', 'hashed_password', 'session_id', 'reset_token']
+
+
 class DB:
     """DB class
     """
@@ -29,9 +32,8 @@ class DB:
             DBSession = sessionmaker(bind=self._engine)
             self.__session = DBSession()
         return self.__session
-    
 
-    def add_user(self, email:str, hashed_password:str) -> User:
+    def add_user(self, email: str, hashed_password: str) -> User:
         """Maybe one day I can add users in my website"""
         if email is None or type(email) is not str:
             return None

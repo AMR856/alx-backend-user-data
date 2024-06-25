@@ -5,6 +5,12 @@ import bcrypt
 from db import DB
 from user import User
 from sqlalchemy.orm.exc import NoResultFound
+import uuid
+
+
+def _generate_uuid() -> str:
+    """The best generator in the world"""
+    return str(uuid.uuid4())
 
 
 def _hash_password(password: str) -> bytes:
@@ -13,6 +19,11 @@ def _hash_password(password: str) -> bytes:
     salt = bcrypt.gensalt()
     hash = bcrypt.hashpw(password_bytes, salt)
     return hash
+
+
+def is_valid(hashed_password: bytes, password: str) -> bool:
+    """Validtor as you can say"""
+    return bcrypt.checkpw(password.encode('utf-8'), hashed_password)
 
 
 class Auth:
@@ -37,3 +48,27 @@ class Auth:
             user = self._db.add_user(email=email,
                                      hashed_password=str(hashed_password))
             return user
+
+    def valid_login(self, email: str, password: str) -> bool:
+        """Validator thing"""
+        try:
+            user = self._db.find_user_by(email=email)
+            string_repr = user.hashed_password
+            stripped_string = string_repr.strip("b'")
+            bytes_object = stripped_string.encode('utf-8')
+            return bcrypt.checkpw(
+                    password.encode("utf-8"),
+                    bytes_object,
+                )
+        except NoResultFound as error:
+            return False
+
+    def create_session(self, email: str) -> str:
+        """Session creatro"""
+        try:
+            user = self._db.find_user_by(email=email)
+            uuid_id = _generate_uuid()
+            self._db.update_user(user.id, session_id=uuid_id)
+            return uuid_id
+        except NoResultFound as error:
+            return None

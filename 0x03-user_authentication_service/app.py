@@ -49,11 +49,20 @@ def sessions_handler() -> str:
 def session_deleter() -> str:
     """Session deleter can delete the sessions"""
     session_id = request.cookies.get('session_id')
+    user = AUTH.get_user_from_session_id(session_id)
+    if user is None:
+        abort(403)
+    AUTH.destroy_session(user_id=user.id)
+    return redirect("/")
+
+
+@app.route('/reset_password', methods=['POST'], strict_slashes=False)
+def password_reseter() -> str:
+    email = request.form.get('email')
     try:
-        user = AUTH._db.find_user_by(session_id=session_id)
-        AUTH.destroy_session(user_id=user.id)
-        return redirect("/")
-    except NoResultFound as error:
+        token = AUTH.get_reset_password_token(email)
+        return jsonify({"email": f"{email}", "reset_token": f"{token}"}), 200
+    except ValueError as error:
         abort(403)
 
 
@@ -61,7 +70,7 @@ def session_deleter() -> str:
 def profile_handler() -> str:
     """Profile handler is here"""
     session_id = request.cookies.get('session_id')
-    user = AUTH.get_user_from_session_id(session_id=session_id)
+    user = AUTH.get_user_from_session_id(session_id)
     if user is None:
         abort(403)
     return jsonify({"email": f"{user.email}"})

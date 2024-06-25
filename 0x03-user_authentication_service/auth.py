@@ -6,6 +6,7 @@ from db import DB
 from user import User
 from sqlalchemy.orm.exc import NoResultFound
 import uuid
+from typing import Optional
 
 
 def _generate_uuid() -> str:
@@ -72,3 +73,21 @@ class Auth:
             return uuid_id
         except NoResultFound as error:
             return None
+
+    def get_user_from_session_id(self, session_id: str) -> Optional[User]:
+        if session_id is None or type(session_id) is not str:
+            return None
+        try:
+            return self._db.find_user_by(session_id=session_id)
+        except NoResultFound as error:
+            return None
+
+    def destroy_session(self, user_id: int) -> None:
+        if user_id is None or type(user_id) is not int:
+            return None
+        try:
+            user = self._db.find_user_by(id=user_id)
+            self._db.update_user(user, user_id, session_id=None)
+        except NoResultFound as error:
+            pass
+        return None

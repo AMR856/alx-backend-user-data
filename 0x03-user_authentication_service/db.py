@@ -9,7 +9,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from user import Base, User
 
-VALID_ARGS = ['email', 'hashed_password', 'session_id', 'reset_token']
+VALID_ARGS = ['email', 'hashed_password', 'session_id', 'reset_token', 'id']
 
 
 class DB:
@@ -53,7 +53,21 @@ class DB:
         for key, _ in kwargs.items():
             if key not in VALID_ARGS:
                 raise InvalidRequestError
-        result = self.__session.query(User).filter_by(**kwargs).first()
+        result = self._session.query(User).filter_by(**kwargs).first()
         if result is None:
             raise NoResultFound
         return result
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """User updater"""
+        if user_id is None or type(user_id) is not int:
+            return None
+        for key, _ in kwargs.items():
+            if key not in VALID_ARGS:
+                raise ValueError
+        user = self.find_user_by(id=user_id)
+        if user is None:
+            return None
+        for key, value in kwargs.items():
+            setattr(user, key, value)
+        return None

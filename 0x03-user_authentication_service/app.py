@@ -52,7 +52,7 @@ def session_deleter() -> str:
     try:
         user = AUTH._db.find_user_by(session_id=session_id)
         AUTH.destroy_session(user_id=user.id)
-        return redirect(url_for("basic_handler"), 302)
+        return redirect("/")
     except NoResultFound as error:
         abort(403)
 
@@ -61,11 +61,10 @@ def session_deleter() -> str:
 def profile_handler() -> str:
     """Profile handler is here"""
     session_id = request.cookies.get('session_id')
-    try:
-        user = AUTH._db.find_user_by(session_id=session_id)
-        return jsonify({"email": f"{user.email}"})
-    except NoResultFound as error:
+    user = AUTH.get_user_from_session_id(session_id=session_id)
+    if user is None:
         abort(403)
+    return jsonify({"email": f"{user.email}"})
 
 
 if __name__ == "__main__":

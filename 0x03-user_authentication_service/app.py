@@ -59,6 +59,7 @@ def session_deleter() -> str:
 
 @app.route('/reset_password', methods=['POST'], strict_slashes=False)
 def password_reseter() -> str:
+    """Just put some docs here"""
     email = request.form.get('email')
     try:
         token = AUTH.get_reset_password_token(email)
@@ -87,7 +88,7 @@ def password_rest_method() -> str:
         AUTH.update_password(reset_token=reset_token, password=new_password)
         return jsonify({"email": f"{email}",
                         "message": "Password updated"}), 200
-    except NoResultFound as error:
+    except ValueError as error:
         abort(403)
 
 

@@ -7,10 +7,11 @@ from flask import Flask, jsonify, abort, request
 from flask import url_for, redirect
 from sqlalchemy.orm.exc import NoResultFound
 from auth import Auth
-
+import logging
 app = Flask(__name__)
 AUTH = Auth()
-
+logger = logging.getLogger()
+logging.basicConfig(filename='hilogger.log')
 
 @app.route('/', methods=['GET'], strict_slashes=False)
 def basic_handler() -> str:
@@ -78,6 +79,7 @@ def profile_handler() -> str:
 
 @app.route('/reset_password', methods=['PUT'], strict_slashes=False)
 def password_rest_method() -> str:
+    """Update password endpoint"""
     email = request.form.get('email')
     reset_token = request.form.get('reset_token')
     new_password = request.form.get('new_password')

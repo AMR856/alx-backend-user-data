@@ -1,0 +1,225 @@
+CRITICAL:root:test@test.com
+CRITICAL:root:bad_reset_token
+CRITICAL:root:test
+ERROR:app:Exception on /reset_password [PUT]
+Traceback (most recent call last):
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/auth.py", line 109, in update_password
+    user = self._db.find_user_by(reset_token=reset_token)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/db.py", line 58, in find_user_by
+    raise NoResultFound
+sqlalchemy.exc.NoResultFound: ()
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/app.py", line 90, in password_rest_method
+    AUTH.update_password(reset_token=reset_token, password=new_password)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/auth.py", line 115, in update_password
+    raise ValueError
+ValueError
+CRITICAL:root:test@test.com
+CRITICAL:root:bad_reset_token
+CRITICAL:root:test
+ERROR:app:Exception on /reset_password [PUT]
+Traceback (most recent call last):
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/auth.py", line 109, in update_password
+    user = self._db.find_user_by(reset_token=reset_token)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/db.py", line 58, in find_user_by
+    raise NoResultFound
+sqlalchemy.exc.NoResultFound: ()
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/app.py", line 90, in password_rest_method
+    AUTH.update_password(reset_token=reset_token, password=new_password)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/auth.py", line 115, in update_password
+    raise ValueError
+ValueError
+CRITICAL:root:test@test.com
+CRITICAL:root:dc3e17db-3889-4949-b419-1d5751b4a13e
+CRITICAL:root:betty
+ERROR:app:Exception on /sessions [POST]
+Traceback (most recent call last):
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/app.py", line 40, in sessions_handler
+    isValid = AUTH.valid_login(email, password)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/auth.py", line 58, in valid_login
+    stripped_string = string_repr.strip("b'")
+TypeError: a bytes-like object is required, not 'str'
+CRITICAL:root:test@test.com
+CRITICAL:root:c7d015ea-ea71-4711-9da5-acbfd2831d58
+CRITICAL:root:betty
+ERROR:app:Exception on /sessions [POST]
+Traceback (most recent call last):
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/app.py", line 40, in sessions_handler
+    isValid = AUTH.valid_login(email, password)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/auth.py", line 58, in valid_login
+    stripped_string = string_repr.strip("b'")
+TypeError: a bytes-like object is required, not 'str'
+CRITICAL:root:test@test.com
+CRITICAL:root:f101be14-05b9-4550-9642-28d5c6b20046
+CRITICAL:root:betty
+ERROR:app:Exception on /sessions [POST]
+Traceback (most recent call last):
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/app.py", line 40, in sessions_handler
+    isValid = AUTH.valid_login(email, password)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/auth.py", line 58, in valid_login
+    stripped_string = string_repr.strip("b'")
+TypeError: a bytes-like object is required, not 'str'
+CRITICAL:root:test@test.com
+CRITICAL:root:14c13734-2b97-47d4-9e76-32ad842c6446
+CRITICAL:root:betty
+ERROR:app:Exception on /sessions [POST]
+Traceback (most recent call last):
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/app.py", line 40, in sessions_handler
+    isValid = AUTH.valid_login(email, password)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/auth.py", line 58, in valid_login
+    stripped_string = string_repr.strip("b'")
+TypeError: a bytes-like object is required, not 'str'
+ERROR:app:Exception on /reset_password [PUT]
+Traceback (most recent call last):
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/app.py", line 87, in password_rest_method
+    AUTH.update_password(reset_token=reset_token, password=new_password.encode('utf-8'))
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/auth.py", line 110, in update_password
+    password_bytes = _hash_password(password)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/auth.py", line 19, in _hash_password
+    password_bytes = password.encode('utf-8')
+AttributeError: 'bytes' object has no attribute 'encode'
+ERROR:app:Exception on /sessions [POST]
+Traceback (most recent call last):
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/app.py", line 40, in sessions_handler
+    isValid = AUTH.valid_login(email, password)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/auth.py", line 58, in valid_login
+    stripped_string = string_repr.strip("b'")
+TypeError: a bytes-like object is required, not 'str'
+CRITICAL:root:<class 'str'>
+ERROR:app:Exception on /sessions [POST]
+Traceback (most recent call last):
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/app.py", line 40, in sessions_handler
+    isValid = AUTH.valid_login(email, password)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/auth.py", line 58, in valid_login
+    stripped_string = string_repr.strip("b'")
+TypeError: a bytes-like object is required, not 'str'
+CRITICAL:root:9ed727a5-ad68-425e-8d0b-8782ba87a7a4
+CRITICAL:root:betty
+CRITICAL:root:<class 'str'>
+ERROR:app:Exception on /sessions [POST]
+Traceback (most recent call last):
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/app.py", line 40, in sessions_handler
+    isValid = AUTH.valid_login(email, password)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/auth.py", line 61, in valid_login
+    stripped_string = string_repr.strip("b'")
+TypeError: a bytes-like object is required, not 'str'
+CRITICAL:root:b'$2b$12$kxcvXbQOqhltWXwF6j7C3eX06wezVsBnTUEr9.WqUbfFmIG485NBe'
+ERROR:app:Exception on /sessions [POST]
+Traceback (most recent call last):
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/app.py", line 40, in sessions_handler
+    isValid = AUTH.valid_login(email, password)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/auth.py", line 62, in valid_login
+    stripped_string = string_repr.strip("b'")
+TypeError: a bytes-like object is required, not 'str'
+CRITICAL:root:b'$2b$12$UxC.K64Z1ynadpsOlfnOwe.OPPvdF7choipB.qxv5us0LHXPIrW6K'
+CRITICAL:root:<class 'bytes'>
+ERROR:app:Exception on /sessions [POST]
+Traceback (most recent call last):
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/env/lib/python3.10/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/app.py", line 40, in sessions_handler
+    isValid = AUTH.valid_login(email, password)
+  File "/home/ameralnas/alx-backend-user-data/0x03-user_authentication_service/auth.py", line 63, in valid_login
+    stripped_string = string_repr.strip("b'")
+TypeError: a bytes-like object is required, not 'str'

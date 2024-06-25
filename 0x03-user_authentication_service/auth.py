@@ -7,6 +7,9 @@ from user import User
 from sqlalchemy.orm.exc import NoResultFound
 import uuid
 from typing import Optional
+import logging
+logger = logging.getLogger()
+logging.basicConfig(filename='hilogger.log')
 
 
 def _generate_uuid() -> str:
@@ -55,11 +58,16 @@ class Auth:
         try:
             user = self._db.find_user_by(email=email)
             string_repr = user.hashed_password
-            stripped_string = string_repr.strip("b'")
-            bytes_object = stripped_string.encode('utf-8')
-            return bcrypt.checkpw(
+            if type(string_repr) is not bytes:
+                stripped_string = string_repr.strip("b'")
+                bytes_object = stripped_string.encode('utf-8')
+                return bcrypt.checkpw(
                     password.encode("utf-8"),
                     bytes_object,
+                    )
+            return bcrypt.checkpw(
+                    password.encode("utf-8"),
+                    string_repr,
                 )
         except NoResultFound as error:
             return False

@@ -4,6 +4,7 @@ Route module for the API
 """
 from flask import Flask
 from flask import Flask, jsonify, abort, request
+from flask import url_for, redirect
 from sqlalchemy.orm.exc import NoResultFound
 from auth import Auth
 
@@ -32,6 +33,7 @@ def register_here() -> str:
 
 @app.route('/sessions', methods=['POST'], strict_slashes=False)
 def sessions_handler() -> str:
+    """What is that btw?"""
     email = request.form.get('email')
     password = request.form.get('password')
     isValid = AUTH.valid_login(email, password)
@@ -41,6 +43,29 @@ def sessions_handler() -> str:
     out = jsonify({"email": f"{email}", "message": "logged in"})
     out.set_cookie('session_id', session_id)
     return out
+
+
+@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
+def session_deleter() -> str:
+    """Session deleter can delete the sessions"""
+    session_id = request.cookies.get('session_id')
+    try:
+        user = AUTH._db.find_user_by(session_id=session_id)
+        AUTH.destroy_session(user_id=user.id)
+        return redirect(url_for("basic_handler"), 302)
+    except NoResultFound as error:
+        abort(403)
+
+
+@app.route('/profile', methods=['GET'], strict_slashes=False)
+def profile_handler() -> str:
+    """Profile handler is here"""
+    session_id = request.cookies.get('session_id')
+    try:
+        user = AUTH._db.find_user_by(session_id=session_id)
+        return jsonify({"email": f"{user.email}"})
+    except NoResultFound as error:
+        abort(403)
 
 
 if __name__ == "__main__":

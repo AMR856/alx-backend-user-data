@@ -75,6 +75,7 @@ class Auth:
             return None
 
     def get_user_from_session_id(self, session_id: str) -> Optional[User]:
+        """User getter from session id"""
         if session_id is None or type(session_id) is not str:
             return None
         try:
@@ -83,6 +84,7 @@ class Auth:
             return None
 
     def destroy_session(self, user_id: int) -> None:
+        """Session destroyer"""
         if user_id is None or type(user_id) is not int:
             return None
         try:

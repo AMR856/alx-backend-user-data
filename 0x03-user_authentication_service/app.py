@@ -76,6 +76,19 @@ def profile_handler() -> str:
     return jsonify({"email": f"{user.email}"})
 
 
+@app.route('/reset_password', methods=['PUT'], strict_slashes=False)
+def password_rest_method() -> str:
+    email = request.form.get('email')
+    reset_token = request.form.get('reset_token')
+    new_password = request.form.get('new_password')
+    try:
+        AUTH.update_password(reset_token=reset_token, password=new_password)
+        return jsonify({"email": f"{email}",
+                        "message": "Password updated"}), 200
+    except NoResultFound as error:
+        abort(403)
+
+
 if __name__ == "__main__":
     """The main program init"""
     app.run(host="0.0.0.0", port="5000")

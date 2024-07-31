@@ -13,6 +13,7 @@ AUTH = Auth()
 logger = logging.getLogger()
 logging.basicConfig(filename='hilogger.log')
 
+
 @app.route('/', methods=['GET'], strict_slashes=False)
 def basic_handler() -> str:
     """A basic handler"""
